@@ -100,6 +100,14 @@ function App() {
 
   const projects = [
     {
+      title: "Pocketa - AI Finance Manager",
+      description: "AI-powered student finance management PWA that helps students track expenses, manage budgets, and receive personalized financial advice. Features intelligent expense tracking, budget management, and context-aware AI financial advisor powered by OpenAI.",
+      tech: ["React", "Node.js", "MongoDB", "OpenAI GPT-3.5", "Express", "TailwindCSS"],
+      github: "https://github.com/Animesh721/Pocketa",
+      demo: "https://pocketa.vercel.app/",
+      image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=400&fit=crop"
+    },
+    {
       title: "Real-Time Hazardous Gas Detection System",
       description: "IoT-based hazardous gas detection system using MQ series sensors and ESP8266 microcontroller. Monitors gas levels and provides real-time alerts by sending mobile notifications upon detecting hazardous gases.",
       tech: ["ESP8266", "MQ Gas Sensor", "Arduino IDE", "Embedded C/C++", "Wokwi Simulator", "Wi-Fi Communication"],
