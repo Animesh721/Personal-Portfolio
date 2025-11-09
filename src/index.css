@@ -506,10 +506,17 @@ body {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
-/* Smooth transitions */
-* {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-duration: 300ms;
+/**
+ * PERFORMANCE OPTIMIZATION:
+ * Removed global * transition to prevent transition on all elements
+ * Transitions now applied selectively to elements that need them
+ * Benefit: Reduces reflow/repaint overhead, especially during scroll
+ */
+
+/* Selective transitions only for elements that need them */
+a, button, input, textarea {
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow;
+  transition-duration: 200ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -897,4 +904,106 @@ button:focus {
 .ripple:hover::before {
   width: 300px;
   height: 300px;
+}
+
+/**
+ * ================== PERFORMANCE OPTIMIZATIONS ==================
+ * GPU Acceleration & Transform Optimization
+ */
+
+/* GPU acceleration for animated elements using will-change and backface-visibility */
+.animate-float,
+.animate-float-x,
+.animate-float-diagonal,
+.animate-morphing-blob,
+.animate-parallax-float {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Scroll reveal elements with GPU acceleration */
+.scroll-reveal,
+.scroll-reveal-left,
+.scroll-reveal-right,
+.scroll-reveal-scale {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+/* CSS Containment for render optimization
+   Limits repaints to isolated sections, massive perf boost */
+.stagger-container {
+  contain: layout style paint;
+}
+
+/* Parallax containers with GPU hints */
+[data-parallax] {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Animation sections with paint containment
+   Prevents parent repaints affecting children */
+.animation-section {
+  contain: paint;
+}
+
+/* Reduce blur filter impact by limiting to specific elements */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-up,
+  .reveal-left,
+  .reveal-right {
+    /* Using less aggressive blur for better performance */
+    filter: none;
+  }
+}
+
+/* Prevent text-shadow jank during animations */
+@supports (text-shadow: 0 0 0 rgba(0,0,0,0)) {
+  .animate-text-glow {
+    /* text-shadow performance: use only 1-2 layers instead of 3-4 */
+    text-shadow:
+      0 0 10px rgba(139, 92, 246, 0.6);
+  }
+}
+
+/* Optimize glass morphism - use contained backdropfilter */
+.glass-card {
+  /* Use contain to limit filter effect overhead */
+  contain: content;
+}
+
+/* Reduce shadow complexity for performance */
+.shadow-3d {
+  /* Simplified shadow for better performance during scroll */
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.15),
+    0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+/* Optimize scrollbar transitions - remove during scroll */
+::-webkit-scrollbar-thumb {
+  transition: none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  transition: background 0.3s ease;
+}
+
+/* Reduce motion preference - disable non-essential animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
 }
