@@ -421,7 +421,7 @@ function App() {
                   <img
                     src="/profile-image.jpg"
                     alt="Animesh Kumar Choudhary"
-                    className="w-full h-full object-cover hover:scale-110 transition-smooth"
+                    className="w-full h-full object-contain hover:scale-110 transition-smooth"
                   />
                 </div>
                 
