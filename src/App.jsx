@@ -403,20 +403,12 @@ function App() {
 
             {/* Image and Visual Elements */}
             <div className="relative order-1 lg:order-2">
-              <div className="relative w-80 h-80 sm:w-96 sm:h-96 mx-auto">
-                {/* Animated background circles */}
-                <div className="absolute inset-0 animate-spin-slow">
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-purple-500 rounded-full"></div>
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-cyan-500 rounded-full"></div>
-                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-pink-500 rounded-full"></div>
-                  <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-5 h-5 bg-blue-500 rounded-full"></div>
-                </div>
-                
+              <div className="relative w-80 sm:w-96 mx-auto">
                 {/* Glowing background */}
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/30 via-cyan-500/30 to-purple-500/30 rounded-full blur-3xl animate-glow-pulse"></div>
-                
-                {/* Main image container */}
-                <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-purple-500/40 shadow-lg shadow-purple-500/30">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/30 via-cyan-500/30 to-purple-500/30 blur-3xl animate-glow-pulse" style={{borderRadius: '16px'}}></div>
+
+                {/* Main image container - Rectangle */}
+                <div className="relative h-96 sm:h-[450px] rounded-2xl overflow-hidden border-4 border-purple-500/40 shadow-lg shadow-purple-500/30">
                   <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-cyan-500/20"></div>
                   <img
                     src="/profile-image.jpg"
@@ -424,12 +416,12 @@ function App() {
                     className="w-full h-full object-cover object-center hover:scale-110 transition-smooth"
                   />
                 </div>
-                
+
                 {/* Status indicator */}
                 <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full p-3 shadow-lg shadow-green-500/30 border-4 border-slate-800">
                   <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
                 </div>
-                
+
                 {/* Floating elements */}
                 <div className="absolute -top-8 -left-8 glass-card p-4 animate-bounce-gentle hover-lift">
                   <Code className="w-6 h-6 text-purple-400" />
